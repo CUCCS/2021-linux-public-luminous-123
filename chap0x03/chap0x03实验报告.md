@@ -44,6 +44,9 @@
 adduser user01 
 usermod -a -G sudo username
 ```
+![添加用户](img/adduser.jpg)
+
+![将新用户添加到sudo用户组](img/add_sudo.jpg)
 
 2. 如何将一个用户添加到一个用户组
 
@@ -57,6 +60,7 @@ usermod -a -G groupname username
 df -h //查看文件系统详细信息
 fdisk -l //查看分区表
 ```
+![查看分区表及文件系统](img/分区表及文件系统.jpg)
 
 4. 如何实现开机自动挂载Virtualbox的共享目录分区
 ```
@@ -67,6 +71,8 @@ fdisk -l //查看分区表
     - 在进行这一步时出席挂载错误“mount: /mnt/xxx: wrong fs type, bad option, bad superblock on xxx...”，执行```sudo apt-get install virtualbox-guest-utils```即可
     5. 修改 /etc/fstab 文件 在文末添加```[Windows共享文件夹名称] /mnt/dirname/ vboxsf defaults 0 0```即可完成开机自动挂载
 ```
+[![asciicast](https://asciinema.org/a/9UlvDM0vDYtM1C2cqaYL99xdc.svg)](https://asciinema.org/a/9UlvDM0vDYtM1C2cqaYL99xdc)
+
 5. 基于LVM的分区如何实现动态扩容和缩减容量
 ```
 //把分区XXX剩余空间创建分区并改为LVM格式
@@ -82,10 +88,14 @@ lvresize --size -{{120G}} --resizefs {{volume_group}}/{{logical_volume}}
 6. 如何通过Systemd设置实现在网络连通时运行一个指定脚本，在网络断开时运行另一个脚本
 
 ```
-//修改网络配置文件
+//修改systemd-networkd.service的配置文件
 [Service]
 ExecStartPost = <sh 脚本位置>
 ExecStopPost = <sh 脚本位置>
+//重载
+sudo systemctl daemon-reload
+//重启服务
+sudo systemctl restart systemd-neworkd.service
 ```
 
 7. 如何通过systemd设置实现一个脚本在任何情况下被杀死之后会立即重新启动，实现杀不死
@@ -96,6 +106,9 @@ Restart = always
 //重载修改过的配置文件
 sudo systemctl daemon-reload
 ```
+# 问题
+
+对于自查清单中的第六个问题不是很清楚，也没有查到可靠的答案
 
 # 参考资料
 [Systemd 入门教程：命令篇](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
