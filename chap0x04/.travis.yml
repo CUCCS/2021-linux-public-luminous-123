@@ -1,0 +1,42 @@
+language: bash
+
+before_install:
+        - sudo apt-get update && sudo apt install shellcheck
+        - sudo apt install imagemagick
+        - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/worldcupplayerinfo.tsv"
+        - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/web_log.tsv.7z"
+        - sudo apt install p7zip-full
+        - 7z x -ot web_log.tsv.7z
+        - ls -l
+
+scirpt:
+        - echo "task one"
+        - shellcheck mission1.sh
+        - echo ":===================================:"
+        - bash shell/mission1.sh -h
+        - bash shell/mission1.sh img/ -q 70%
+        - bash shell/mission1.sh img/ -r 50%
+        - bash shell/mission1.sh img/ -m "Luminous_song"
+        - bash shell/mission1.sh img/ -p "song_"
+        - bash shell/mission1.sh img/ -s "123"
+        - bash shell/mission1.sh img/ -t
+        - echo ":===================================:"
+        - echo "task two"
+        - shellcheck mission2.sh
+        - echo ":===================================:"
+        - bash shell/mission2.sh -h
+        - bash shell/mission2.sh -a worldcupplayerinfo.tsv -p worldcupplayerinfo.tsv -n worldcupplayerinfo.tsv -m worldcupplayerinfo.tsv
+        - echo ":===================================:"        
+        - echo "task three"
+        - shellcheck mission3.sh
+        - echo ":===================================:"
+        - bash shell/mission3.sh -h
+        - bash shell/mission3.sh -n web_log.tsv
+        - bash shell/mission3.sh -i web_log.tsv
+        - bash shell/mission3.sh -u web_log.tsv
+        - bash shell/mission3.sh -r web_log.tsv -s web_log.tsv
+        - bash shell/mission3.sh -p web_log.tsv /history/skylab/skylab-small.gif
+
+notifications:
+  email:
+    on_success: never
