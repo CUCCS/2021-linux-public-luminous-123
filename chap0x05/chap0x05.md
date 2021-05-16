@@ -38,7 +38,6 @@ sudo vim /opt/verynginx/openresty/nginx/conf/nginx.conf
 # 保存退出
 ``` 
 访问主机8006端口
-![](img/verynginx.jpg)
 -----------
 输入用户名和密码```verynginx/verynginx```登入网站
 
