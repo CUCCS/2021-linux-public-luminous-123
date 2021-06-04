@@ -1,0 +1,6 @@
+network:
+    ethernets:
+      enp0s9:
+        dhcp4: no
+        addresses: [192.168.10.2/24]
+    version: 2
